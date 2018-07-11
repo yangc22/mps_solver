@@ -1,0 +1,33 @@
+# Buskens, C. and  Maurer, H.,
+# SQP-methods for solving optimal control problems with control 
+# and state constraints: adjoint variables, sensitivity analysis and 
+# real-time control,
+# Journal of Computational and Applied Mathematics, Vol. 120, pp. 85--108, 2000.
+
+Variables               = [rx, d1, d2, rz];
+Constants               = [pi = 3.14159265358979, uxmax = 2.0, uzmax = 1.0, cx = 0.5, cz = 0.1, rx0 = 0.1];
+StateVariables          = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10];
+ControlVariables        = [u1, u2, u3, u4];
+InitialConstraints      = [x1, x2, x3 - 0.02, x4 - pi/2.0, x5 - 0.1, x6 + pi/4.0, x7 - 1.0, x8, x9 - 0.5, x10 - 0.1];           
+TerminalConstraints     = [x1 - 1.0, x2 - 0.5, x3, x4 - pi/2.0, x5, x6, x7, x8, x9, x10];
+#TerminalPenalty         = (x1-1.0)*(x1-1) + (x2 - 0.5)*(x2-0.5) + x3*x3 + (x4-pi/2)*(x4-pi/2)  +
+#                             x5*x5 + x6*x6 + x7*x7 +  x8*x8 +x9*x9+x10*x10;
+CostFunctional          = u1*u1 + u2*u2 + u3*u3 + u4*u4;
+
+d1 = ((x1-cx)/rx0);
+d2 = ((x3-cz)/cz);
+rx = (-uxmax*exp(-((x1-cx)/rx0)*((x1-cx)/rx0))*(x1-cx)*((x3-cz)/cz)*((x3-cz)/cz));
+rz = (-uzmax*exp(-((x1-cx)/rx0)*((x1-cx)/rx0))*((x3-cz)/cz)*((x3-cz)/cz));
+
+DifferentialEquations     = [cos(x6)*cos(x5)*x7+(-uxmax*exp(-((x1-cx)/rx0)*((x1-cx)/rx0))*(x1-cx)*((x3-cz)/cz)*((x3-cz)/cz)), sin(x6)*cos(x5)*x7,-sin(x5)*x7+(-uzmax*exp(-((x1-cx)/rx0)*((x1-cx)/rx0))*((x3-cz)/cz)*((x3-cz)/cz)),x8+sin(x4)*tan(x5)*x9+cos(x4)*tan(x5)*x10,cos(x4)*x9-sin(x4)*x10,(x9*sin(x4)+x10*cos(x4))/cos(x5),u1,u2,u3,u4];
+
+StateEstimate           = [0, 0, 0.02, pi/2.0, 0.1, -pi/4.0, 1, 0, 0.5, 0.1];
+ControlEstimate         = [0, 0, 0, 0];
+
+Nodes                   = 101;
+Tolerance               = 1.0e-6;
+OutputFile              = "ex41.data";
+MaximumNodes            = 1000;
+Display                 = NO;
+#MaximumNewtonIterations = 500;
+#MaximumMeshRefinements  = 20;

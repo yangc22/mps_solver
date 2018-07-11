@@ -1,4 +1,5 @@
-function [y0, z0, para, t0, tf, t_span, output_File, alpham, tol, nodes_max, mesh_max, nx, nu, nw, nd, ns] = generate_bvpdae(filename)
+function [y0, z0, para, t0, tf, t_span, output_File, alpham, tol, nodes_max, mesh_max, nx, nu, nw, nd, ns] = generate_bvpdae_withSym(filename)
+% for versions before MATLAB 2018 with 'sym' to create symbolic variables
 % avoid the use of the ancient Greek alphabet like "beta", "theta"
 % as the name of the variables as they are easy to be the name of matlan mupad function
 %% Pre-allocate size of each variables
