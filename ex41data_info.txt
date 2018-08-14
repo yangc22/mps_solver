@@ -1,0 +1,2 @@
+Smoothed Fischer-Burmeister noninterior.
+method: Multiple shooting. Flag coefficients: 1
