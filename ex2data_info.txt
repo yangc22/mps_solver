@@ -1,4 +1,0 @@
-Smoothed Fischer-Burmeister noninterior.
-method: Multiple shooting. Flag coefficients: 1
-alpha = 1; nodes = 101; LTE = 1.348083e-01.
-Get the final solution! alpha = 1.
